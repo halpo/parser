@@ -1,5 +1,5 @@
-#ifndef HIGHLIGHT_H
-#define HIGHLIGHT_H
+#ifndef PARSER_H
+#define PARSER_H
 
 #include <stdlib.h>
 #include <stdio.h>
