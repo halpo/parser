@@ -1,5 +1,5 @@
 #include <Rinternals.h>
-#include "parser.h"
+#include "../include/parser.h"
 
 static Rboolean known_to_be_utf8 = FALSE ;
 static Rboolean known_to_be_latin1 = FALSE ;
