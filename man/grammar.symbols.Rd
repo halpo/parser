@@ -25,7 +25,7 @@ grammar.symbols()
 \examples{
 \dontrun{
 # the bison generated grammar output
-system.file( "grammar.output", package = "highlight" )
+system.file( "grammar.output", package = "parser" )
 data( symbols )
 identical( symbols, grammar.symbols( ) )
 }

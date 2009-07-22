@@ -23,14 +23,6 @@ parser <- function( file, encoding = "unknown", text ){
 	p
 }
 
-getData <- function( x, i = 0, 
-	parent = sapply( x[i], function(.) attr(.,"id" ) ), 
-	... ){
-	
-	subset( data, id %in% getChilds(x,i,parent) | id %in% parent )
-	
-}
-
 getChilds <- function( x, i = 0, 
 	parent = sapply( x[i], function(.) attr(.,"id" ) ) ){
 	
