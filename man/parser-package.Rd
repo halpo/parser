@@ -38,6 +38,9 @@ dump( "glm" , file = tf )
 # modified R parser
 p <- parser( tf )
 attr(p, "data") 
+
+# clean up
+unlink( tf )
 }
 }
 \keyword{ package }
