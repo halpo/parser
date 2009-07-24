@@ -37,7 +37,7 @@ dump( "glm" , file = tf )
 
 # modified R parser
 p <- parser( tf )
-
+attr(p, "data") 
 }
 }
 \keyword{ package }
