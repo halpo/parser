@@ -9,4 +9,5 @@ Description: detailed source code parser, based on the
 	standard R parser but organizing the information differently
 License: GPL (>= 3)
 Depends: R (>= 2.9)
+LazyData: yes
 
