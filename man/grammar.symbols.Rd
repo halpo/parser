@@ -25,9 +25,10 @@ grammar.symbols()
 \examples{
 \dontrun{
 # the bison generated grammar output
-system.file( "grammar.output", package = "parser" )
-data( symbols )
-identical( symbols, grammar.symbols( ) )
+system.file( "grammar", "gram.output", package = "parser" )
+data( grammar_symbols )
+% test if the grammar_symbols.txt is up to date
+stopifnot( identical( grammar_symbols, grammar.symbols( ) ) )
 }
 }
 \keyword{ manip }
