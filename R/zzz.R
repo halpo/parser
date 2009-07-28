@@ -1,4 +1,4 @@
 .onAttach <- function( libname, pkgname ){
-	data( symbols )
+	data( grammar_symbols )
 }
 

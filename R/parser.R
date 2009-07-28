@@ -7,10 +7,9 @@ parser <- function( file, encoding = "unknown", text ){
 	data <- as.data.frame( t(attr(p,"data")) )
 	colnames( data ) <- c( "line1", "col1", "byte1", 
 		 	"line2", "col2", "byte2", "token", "id", "parent" )
-	m <- match( data$token, symbols$token )
-	symbols <- grammar.symbols()
-	data$token.desc <- as.character(symbols$desc)[ m ]
-	data$terminal <- symbols$terminal[m]
+	m <- match( data$token, grammar_symbols$token )
+	data$token.desc <- as.character(grammar_symbols$desc)[ m ]
+	data$terminal <- grammar_symbols$terminal[m]
 	data$text     <- rep( "", nrow(data) )
 	toks <- getTokens( data= subset(data, terminal), 
 		encoding = encoding, file = file, 

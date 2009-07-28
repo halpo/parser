@@ -61,18 +61,11 @@ returns the information as an offset to the start of the line. }
 	The usual R parser \code{\link{parse}}
 }
 \examples{	
-\dontrun{
-tf <- tempfile( ) 
-dump( "jitter", file = tf ) 
-out <- parser( tf )
-data <- attr( out, "data" )
-head( data )
-unlink(tf)
 
-eval( out )
-jitter( 1:10 )
-}
-	
+f <- system.file( "example", "f.R", package = "parser" )
+out <- parser( f )
+
+
 }
 \keyword{ manip }
 

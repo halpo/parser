@@ -1,15 +1,15 @@
 \name{symbols}
 \Rdversion{1.1}
-\alias{symbols}
+\alias{grammar_symbols}
 \docType{data}
 \title{
 	Symbols used by the bison generated parser. 
 }
 \description{
-	The data contains desscription of terminal and non-terminal 
+	The data contains description of terminal and non-terminal 
 	symbols used by the bison generated parser.
 }
-\usage{data(symbols)}
+\usage{data(grammar_symbols)}
 \format{
   A data frame with 77 observations on the following 3 variables.
   \describe{
@@ -23,7 +23,7 @@
 	\code{\link{grammar.symbols}} function
 }
 \examples{
-data(symbols)
+data(grammar_symbols)
 }
 \keyword{datasets}
 
