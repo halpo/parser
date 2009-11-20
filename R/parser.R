@@ -2,6 +2,13 @@ parser <- function( file, encoding = "unknown", text ){
 	if( !missing( text ) ){
 		file <- tempfile( );
 		cat( text , file = file, sep = "\n" )
+	} else if( inherits(file,"function") ){
+		source <- attr( file, "source" )
+		if( is.null(source ) ){
+			source <- deparse( file )
+		}
+		file <- tempfile( )
+		writeLines( source, file )
 	}
 	p <- .External( "do_parser", file = file, encoding = encoding )
 	data <- as.data.frame( t(attr(p,"data")) )
