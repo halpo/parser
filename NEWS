@@ -1,0 +1,5 @@
+0.0-5	(under development)
+   o	parser now accepts functions and connections as the first argument
+
+0.0-3	2009-07-30
+   o 	initial release
