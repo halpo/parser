@@ -12,8 +12,8 @@ Detailed R source code parser
 \tabular{ll}{
 Package: \tab parser\cr
 Type: \tab Package\cr
-Version: \tab 0.0-5\cr
-Date: \tab 2009-11-20\cr
+Version: \tab 0.0-6\cr
+Date: \tab 2009-11-21\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr
 }
