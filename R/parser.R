@@ -33,7 +33,7 @@ parser <- function( file, encoding = "unknown", text ){
 	
 	# go back to C to grab the actual tokens
 	data$text     <- character( nrow(data) )
-	toks <- getTokens( data= subset(data, terminal), 
+	toks <- getTokens( data= data[ data$terminal, , drop = FALSE], 
 		encoding = encoding, file = file, 
 		sort = FALSE )
 	data$text[ match( toks$id, data$id) ] <- toks$text
@@ -84,7 +84,7 @@ isTerminal <- function(x, id = 0, data = attr(x, "data") ){
 
 #' Gets the terminal tokens
 getTokens <- function( x, 
-	data = subset( attr( x, "data" ), terminal ), 
+	data = attr( x, "data" )[ attr(x, "data")[["terminal"]], ], 
 	encoding = attr( x, "encoding"), 
 	file = attr( x, "file" ), 
 	sort = TRUE ){

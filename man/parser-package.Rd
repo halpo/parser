@@ -13,7 +13,7 @@ Detailed R source code parser
 Package: \tab parser\cr
 Type: \tab Package\cr
 Version: \tab 0.0-6\cr
-Date: \tab 2009-11-21\cr
+Date: \tab 2009-12-12\cr
 License: \tab GPL-3\cr
 LazyLoad: \tab yes\cr
 }

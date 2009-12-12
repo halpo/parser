@@ -1,4 +1,4 @@
-#include "../inst/include/parser.h"
+#include "parser.h"
 
 static int buf_size ;
 

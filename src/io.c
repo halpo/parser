@@ -1,4 +1,4 @@
-#include "../inst/include/parser.h"
+#include "parser.h"
 
 #ifdef Win32
 static char * fixmode(const char *mode){
