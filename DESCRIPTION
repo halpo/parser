@@ -1,7 +1,7 @@
 Package: parser
 Type: Package
 Title: Detailed R source code parser
-Version: 0.0-6
+Version: 0.0-7
 Date: 2009-12-12
 Author: Romain Francois <francoisromain@free.fr>
 Maintainer: Romain Francois <francoisromain@free.fr>
