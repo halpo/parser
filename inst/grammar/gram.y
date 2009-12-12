@@ -3,7 +3,7 @@
 /* :tabSize=4:indentSize=4:noTabs=false:folding=explicit:collapseFolds=1: */
 
 
-#include "../inst/include/parser.h"
+#include "parser.h"
 
 #define YYERROR_VERBOSE 1
 #define PARSE_ERROR_SIZE 256	    /* Parse error messages saved here */
