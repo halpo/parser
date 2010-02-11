@@ -26,6 +26,8 @@ parser <- function( file, encoding = "unknown", text ){
 	colnames( data ) <- c( "line1", "col1", "byte1", 
 		 	"line2", "col2", "byte2", "token", "id", "parent" )
 	
+	data[["top_level"]] <- cumsum( data[["parent"]] == 0L )
+	
 	# populate token.desc and terminal
 	m <- match( data$token, grammar_symbols$token )
 	data$token.desc <- as.character(grammar_symbols$desc)[ m ]
