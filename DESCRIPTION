@@ -1,13 +1,13 @@
 Package: parser
 Type: Package
 Title: Detailed R source code parser
-Version: 0.0-7
-Date: 2009-12-13
-Author: Romain Francois <francoisromain@free.fr>
-Maintainer: Romain Francois <francoisromain@free.fr>
+Version: 0.0-8
+Date: 2010-02-12
+Author: Romain Francois <romain@r-enthusiasts.com>
+Maintainer: Romain Francois <romain@r-enthusiasts.com>
 Description: detailed source code parser, based on the 
 	standard R parser but organizing the information differently
 License: GPL (>= 3.0)
 Depends: R (>= 2.10.0)
 LazyData: yes
-
+URL: http://www.r-enthusiasts.com
