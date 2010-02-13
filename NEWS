@@ -1,3 +1,7 @@
+0.0-8	2010-02-12
+   o	The result of the parser function contains a "top_level" column. 
+	This is used by the 0.1-5 version of highlight
+
 0.0-6	2009-12-12
    o 	fix to make it more cross-platform
 
