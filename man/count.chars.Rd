@@ -1,5 +1,4 @@
 \name{count.chars}
-\Rdversion{1.1}
 \alias{count.chars}
 \title{
 	Counts the number of characters and bytes in each line of a file

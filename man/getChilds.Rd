@@ -1,5 +1,4 @@
 \name{getChilds}
-\Rdversion{1.1}
 \alias{getChilds}
 \title{
 Get the child expression of an expression in the parse tree

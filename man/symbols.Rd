@@ -1,5 +1,4 @@
 \name{symbols}
-\Rdversion{1.1}
 \alias{grammar_symbols}
 \docType{data}
 \title{

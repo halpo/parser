@@ -1,5 +1,4 @@
 \name{parser}
-\Rdversion{1.1}
 \alias{parser}
 \title{
 	Detailed R code parser

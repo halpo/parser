@@ -1,5 +1,4 @@
 \name{parser-package}
-\Rdversion{1.1}
 \alias{parser-package}
 \docType{package}
 \title{

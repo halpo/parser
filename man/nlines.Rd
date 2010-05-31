@@ -1,5 +1,4 @@
 \name{nlines}
-\Rdversion{1.1}
 \alias{nlines}
 \title{
 	Counts the number of lines in a file
