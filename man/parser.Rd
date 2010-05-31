@@ -54,7 +54,7 @@ comply with the \code{\link{substring}} function whereas this function
 returns the information as an offset to the start of the line. }
 
 \author{
-	Romain Francois <francoisromain@free.fr>
+	Romain Francois <romain@r-enthusiasts.com>
 }
 
 \seealso{

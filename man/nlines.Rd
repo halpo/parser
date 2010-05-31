@@ -20,7 +20,7 @@ a character string giving the name of the file
 	The number of lines of the file
 }
 \author{
-	Romain Francois <francoisromain@free.fr>
+	Romain Francois <romain@r-enthusiasts.com>
 }
 \examples{
 \dontrun{

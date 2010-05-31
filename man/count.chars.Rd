@@ -26,7 +26,7 @@ encoding to assume for the file
 	\item{}{the number of bytes in the same line in the file}
 }
 \author{
-	Romain Francois <francoisromain@free.fr>
+	Romain Francois <romain@r-enthusiasts.com>
 }
 \seealso{
 	\code{\link{nlines}}, \code{\link{parse}}

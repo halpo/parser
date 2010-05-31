@@ -3130,7 +3130,7 @@ static void finalizeData( ){
 	
 	SETLENGTH( data, data_count * 9 ) ;
 	
-	int maxId = _ID(nloc-1) ;
+	// int maxId = _ID(nloc-1) ;
 	int i, j, id ;
 	int parent ; 
 	
@@ -3289,7 +3289,7 @@ SEXP attribute_hidden do_parser(SEXP args){
 	SEXP filename ;
     ParseStatus status;
 	FILE *fp;
-	/*}}}
+	/*}}}*/
 
 	/*{{{ process arguments */
     

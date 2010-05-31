@@ -27,7 +27,7 @@ An integer vector giving all the ids of symbols that
 are childs of one of the parent expression
 }
 \author{
-Romain Francois <francoisromain@free.fr>
+Romain Francois <romain@r-enthusiasts.com>
 }
 
 \seealso{

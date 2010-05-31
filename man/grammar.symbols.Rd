@@ -17,7 +17,7 @@ grammar.symbols()
 	A data frame. See \link{symbols}
 }
 \author{
-	Romain Francois <francoisromain@free.fr>
+	Romain Francois <romain@r-enthusiasts.com>
 }
 \seealso{
 	The data frame \code{\link{symbols}} is generated using this function
