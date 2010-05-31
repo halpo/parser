@@ -8,7 +8,7 @@ SEXP top_level( SEXP parent ){
 	int* p_top = INTEGER(top) ;
 	for( int i=0; i<n; i++){
 		p_top[i] = current ;
-		if( p_parent[i] == 0 ) current++ ;
+		if( p_parent[i] <= 0 ) current++ ;
 	}
 	UNPROTECT(1);
 	return top ;
