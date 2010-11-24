@@ -7,4 +7,5 @@ export( count.chars )
 export( getChilds ) 
 
 importFrom( utils, data )
+importClassesFrom( Rcpp, "Module" )
 

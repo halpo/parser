@@ -1,3 +1,8 @@
+0.0-11  2010-11-24
+    o   using Rcpp modules 
+    
+    o   faster nlines
+
 0.0-8	2010-02-12
    o	The result of the parser function contains a "top_level" column. 
 	This is used by the 0.1-5 version of highlight
