@@ -21,15 +21,9 @@ count.chars <- function( file, encoding = "unknown" ) NULL
 	
 	nlines <- MODULE$nlines
 	formals( nlines ) <- alist( file = )
-	b <- body( nlines )
-	b[[2]] <- call( ".External", b[[2]][[2]], b[[2]][[3]], as.name( "file") )
-	body( nlines ) <- b
 	assign( "nlines", nlines, NAMESPACE )
 	
 	count.chars <- MODULE$count.chars
-	b <- body( count.chars )
-	b[[2]] <- call( ".External", b[[2]][[2]], b[[2]][[3]], as.name( "file"), as.name( "encoding" ) )
-	body( count.chars ) <- b
 	formals( count.chars ) <- alist( file = , encoding = "unknown" )
 	assign( "count.chars", count.chars, NAMESPACE )
 	

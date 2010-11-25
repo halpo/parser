@@ -8,4 +8,5 @@ export( getChilds )
 
 importFrom( utils, data )
 importClassesFrom( Rcpp, "Module" )
+importMethodsFrom( Rcpp, "formals<-" )
 
