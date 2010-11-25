@@ -8,7 +8,7 @@ Maintainer: Romain Francois <romain@r-enthusiasts.com>
 Description: detailed source code parser, based on the 
 	standard R parser but organizing the information differently
 License: GPL (>= 2.0)
-Depends: R (>= 2.12.0), Rcpp (>= 0.8.8.3)
+Depends: R (>= 2.12.0), Rcpp (>= 0.8.8.4)
 LinkingTo: Rcpp
 LazyData: yes
 URL: http://www.r-enthusiasts.com
