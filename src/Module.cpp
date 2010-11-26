@@ -35,12 +35,12 @@ SEXP do_countchars( const char* fname, const char* encoding ){
     return result ;
 }
 
-
 RCPP_MODULE(parser_module){
     function( "nlines", &nlines, 
         List::create( _["file"] = R_MissingArg ) ) ;
     function( "count.chars", &do_countchars, 
         List::create( _["file"] = R_MissingArg, _["encoding"] = "unknown" )
     ) ;
+    
 }
 
