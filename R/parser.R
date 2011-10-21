@@ -143,4 +143,5 @@ grammar.symbols <- function(  ){
 		)
 }
 
+grammar_symbols <- grammar.symbols()
 
