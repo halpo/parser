@@ -18,16 +18,12 @@ grammar.symbols()
 \author{
 	Romain Francois <romain@r-enthusiasts.com>
 }
-\seealso{
-	The data frame \code{\link{symbols}} is generated using this function
-}
 \examples{
 \dontrun{
 # the bison generated grammar output
 system.file( "grammar", "gram.output", package = "parser" )
-data( grammar_symbols )
-% test if the grammar_symbols.txt is up to date
-stopifnot( identical( grammar_symbols, grammar.symbols( ) ) )
+
+grammar.symbols()
 }
 }
 \keyword{ manip }
