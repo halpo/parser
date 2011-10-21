@@ -1,3 +1,8 @@
+0.0-14  2011-10-21
+
+    o   minor updates. parser could not be imported in another package. 
+        Suggestion by Yihui Xie
+
 0.0-11  2010-11-24
     o   using Rcpp modules 
     
