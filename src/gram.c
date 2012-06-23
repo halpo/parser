@@ -345,7 +345,7 @@ static void setId( SEXP expr, yyltype loc){
 
 		
 # define YY_LOCATION_PRINT(File, Loc)			\
- fprintf ( stderr, "%d.%d.%d-%d.%d.%d (%d)",			\
+ fprintf ( File, "%d.%d.%d-%d.%d.%d (%d)",			\
       (Loc).first_line, (Loc).first_column,	(Loc).first_byte, \
       (Loc).last_line,  (Loc).last_column, (Loc).last_byte, \
 	  (Loc).id ) \
@@ -354,7 +354,7 @@ static void setId( SEXP expr, yyltype loc){
 #define LBRACE	'{'
 #define RBRACE	'}'
 
-#define YYDEBUG 1
+// #define YYDEBUG 1
 
 static int colon ;
 
@@ -486,9 +486,9 @@ static int mbcs_get_next(int c, wchar_t *wc){
 
 
 /* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 1
-#endif
+// #ifndef YYDEBUG
+// # define YYDEBUG 1
+// #endif
 
 /* Enabling verbose error messages.  */
 #ifdef YYERROR_VERBOSE
