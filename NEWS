@@ -1,3 +1,9 @@
+0.0-16  2012-06-25
+    
+    o   Andrew Redd taking over maintenance of the package.
+    o   Incorporated bug fixes from R Core Team released in 0.0-15.
+    o   Bug fix removing debugging info that prevented passing CRAN checks.
+
 0.0-14  2011-10-21
 
     o   minor updates. parser could not be imported in another package. 
