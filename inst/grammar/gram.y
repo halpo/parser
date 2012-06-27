@@ -325,6 +325,7 @@ static int mbcs_get_next(int c, wchar_t *wc){
 %token		SYMBOL_PACKAGE
 %token		COLON_ASSIGN
 %token		SLOT
+%token		RBB
 /*}}}*/
 
 /*{{{ This is the precedence table, low to high */
@@ -376,8 +377,8 @@ expr	: 	NUM_CONST					{ $$ = $1;  setId( $$, @$); }
 	|	'{' exprlist '}'				{ $$ = xxexprlist($1,$2);  setId( $$, @$); }
 	|	'(' expr_or_assign ')'			{ $$ = xxparen($1,$2);		setId( $$, @$); }
 
-	|	'-' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); }
-	|	'+' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); }
+	|	'-' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); modif_token(&@1, UMINUS); }
+	|	'+' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); modif_token(&@1, UPLUS); }
 	|	'!' expr %prec UNOT				{ $$ = xxunary($1,$2);     setId( $$, @$); }
 	|	'~' expr %prec TILDE			{ $$ = xxunary($1,$2);     setId( $$, @$); }
 	|	'?' expr						{ $$ = xxunary($1,$2);     setId( $$, @$); }
@@ -417,7 +418,7 @@ expr	: 	NUM_CONST					{ $$ = $1;  setId( $$, @$); }
 										{ $$ = xxfor($1,$2,$3); setId( $$, @$); }
 	|	WHILE cond expr_or_assign		{ $$ = xxwhile($1,$2,$3);   setId( $$, @$); }
 	|	REPEAT expr_or_assign			{ $$ = xxrepeat($1,$2);         setId( $$, @$);}
-	|	expr LBB sublist ']' ']'		{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
+	|	expr LBB sublist ']' ']'		{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); modif_token(&@4, RBB); }
 	|	expr '[' sublist ']'			{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
 	|	SYMBOL NS_GET SYMBOL			{ $$ = xxbinary($2,$1,$3);      	 setId( $$, @$); modif_token( &@1, SYMBOL_PACKAGE ) ; }
 	|	SYMBOL NS_GET STR_CONST		{ $$ = xxbinary($2,$1,$3);      setId( $$, @$);modif_token( &@1, SYMBOL_PACKAGE ) ; }
