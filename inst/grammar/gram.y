@@ -313,7 +313,7 @@ static int mbcs_get_next(int c, wchar_t *wc){
 /*{{{ Tokens */
 %token		END_OF_INPUT ERROR
 %token		STR_CONST NUM_CONST NULL_CONST SYMBOL FUNCTION 
-%token		LEFT_ASSIGN EQ_ASSIGN RIGHT_ASSIGN LBB
+%token		LEFT_ASSIGN EQ_ASSIGN RIGHT_ASSIGN LBB RBB
 %token		FOR IN IF ELSE WHILE NEXT BREAK REPEAT
 %token		GT GE LT LE EQ NE AND OR AND2 OR2
 %token		NS_GET NS_GET_INT
@@ -325,7 +325,6 @@ static int mbcs_get_next(int c, wchar_t *wc){
 %token		SYMBOL_PACKAGE
 %token		COLON_ASSIGN
 %token		SLOT
-%token		RBB
 /*}}}*/
 
 /*{{{ This is the precedence table, low to high */
