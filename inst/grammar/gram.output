@@ -12,7 +12,6 @@ Terminals unused in grammar
    SYMBOL_PACKAGE
    COLON_ASSIGN
    SLOT
-   RBB
    NOT
    UPLUS
 
@@ -102,7 +101,7 @@ Grammar
    46     | FOR forcond expr_or_assign
    47     | WHILE cond expr_or_assign
    48     | REPEAT expr_or_assign
-   49     | expr LBB sublist ']' ']'
+   49     | expr LBB sublist RBB
    50     | expr '[' sublist ']'
    51     | SYMBOL NS_GET SYMBOL
    52     | SYMBOL NS_GET STR_CONST
@@ -172,7 +171,7 @@ $end (0) 0
 '?' (63) 19 29
 '@' (64) 61 62
 '[' (91) 50
-']' (93) 49 50
+']' (93) 50
 '^' (94) 25
 '{' (123) 13
 '}' (125) 13
@@ -220,7 +219,7 @@ SYMBOL_FUNCTION_CALL (296)
 SYMBOL_PACKAGE (297)
 COLON_ASSIGN (298)
 SLOT (299)
-RBB (300)
+RBB (300) 49
 LOW (301)
 TILDE (302)
 NOT (303)
@@ -676,7 +675,7 @@ state 25
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -967,7 +966,7 @@ state 38
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -1031,7 +1030,7 @@ state 39
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -1092,7 +1091,7 @@ state 40
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -1137,7 +1136,7 @@ state 41
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -1209,7 +1208,7 @@ state 45
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -1343,7 +1342,7 @@ state 51
 
 state 52
 
-   49 expr: expr LBB . sublist ']' ']'
+   49 expr: expr LBB . sublist RBB
 
     STR_CONST   shift, and go to state 100
     NUM_CONST   shift, and go to state 4
@@ -2084,7 +2083,7 @@ state 89
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2157,7 +2156,7 @@ state 91
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2304,7 +2303,7 @@ state 97
    40     | expr LEFT_ASSIGN expr .
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2375,7 +2374,7 @@ state 99
    41     | expr . RIGHT_ASSIGN expr
    41     | expr RIGHT_ASSIGN expr .
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2481,7 +2480,7 @@ state 103
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2522,10 +2521,10 @@ state 103
 
 state 104
 
-   49 expr: expr LBB sublist . ']' ']'
+   49 expr: expr LBB sublist . RBB
    75 sublist: sublist . cr ',' sub
 
-    ']'  shift, and go to state 144
+    RBB  shift, and go to state 144
 
     $default  reduce using rule 89 (cr)
 
@@ -2565,7 +2564,7 @@ state 106
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2623,7 +2622,7 @@ state 107
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2681,7 +2680,7 @@ state 108
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2739,7 +2738,7 @@ state 109
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2797,7 +2796,7 @@ state 110
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2855,7 +2854,7 @@ state 111
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2913,7 +2912,7 @@ state 112
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -2970,7 +2969,7 @@ state 113
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3029,7 +3028,7 @@ state 114
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3086,7 +3085,7 @@ state 115
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3145,7 +3144,7 @@ state 116
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3209,7 +3208,7 @@ state 117
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3270,7 +3269,7 @@ state 118
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3319,7 +3318,7 @@ state 119
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3368,7 +3367,7 @@ state 120
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3415,7 +3414,7 @@ state 121
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3462,7 +3461,7 @@ state 122
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3508,7 +3507,7 @@ state 123
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3553,7 +3552,7 @@ state 124
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3650,7 +3649,7 @@ state 131
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -3929,16 +3928,16 @@ state 143
 
 state 144
 
-   49 expr: expr LBB sublist ']' . ']'
+   49 expr: expr LBB sublist RBB .
 
-    ']'  shift, and go to state 156
+    $default  reduce using rule 49 (expr)
 
 
 state 145
 
    75 sublist: sublist cr . ',' sub
 
-    ','  shift, and go to state 157
+    ','  shift, and go to state 156
 
 
 state 146
@@ -3980,7 +3979,7 @@ state 148
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -4042,7 +4041,7 @@ state 149
     '{'         shift, and go to state 20
     '!'         shift, and go to state 21
 
-    expr_or_assign  go to state 158
+    expr_or_assign  go to state 157
     equal_assign    go to state 24
     expr            go to state 25
 
@@ -4052,7 +4051,7 @@ state 150
    87 formlist: formlist ',' SYMBOL .
    88         | formlist ',' SYMBOL . EQ_ASSIGN expr
 
-    EQ_ASSIGN  shift, and go to state 159
+    EQ_ASSIGN  shift, and go to state 158
 
     $default  reduce using rule 87 (formlist)
 
@@ -4082,7 +4081,7 @@ state 151
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -4116,7 +4115,7 @@ state 151
     '@'           shift, and go to state 73
     '('           shift, and go to state 74
     '['           shift, and go to state 75
-    ')'           shift, and go to state 160
+    ')'           shift, and go to state 159
     '%'           shift, and go to state 76
 
 
@@ -4152,7 +4151,7 @@ state 153
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -4216,7 +4215,7 @@ state 154
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -4280,7 +4279,7 @@ state 155
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
@@ -4321,13 +4320,6 @@ state 155
 
 state 156
 
-   49 expr: expr LBB sublist ']' ']' .
-
-    $default  reduce using rule 49 (expr)
-
-
-state 157
-
    75 sublist: sublist cr ',' . sub
 
     STR_CONST   shift, and go to state 100
@@ -4352,17 +4344,17 @@ state 157
     $default  reduce using rule 76 (sub)
 
     expr  go to state 103
-    sub   go to state 161
+    sub   go to state 160
 
 
-state 158
+state 157
 
    42 expr: FUNCTION '(' formlist ')' cr expr_or_assign .
 
     $default  reduce using rule 42 (expr)
 
 
-state 159
+state 158
 
    88 formlist: formlist ',' SYMBOL EQ_ASSIGN . expr
 
@@ -4385,24 +4377,24 @@ state 159
     '{'         shift, and go to state 20
     '!'         shift, and go to state 21
 
-    expr  go to state 162
+    expr  go to state 161
 
 
-state 160
+state 159
 
    67 forcond: '(' SYMBOL IN expr ')' .
 
     $default  reduce using rule 67 (forcond)
 
 
-state 161
+state 160
 
    75 sublist: sublist cr ',' sub .
 
     $default  reduce using rule 75 (sublist)
 
 
-state 162
+state 161
 
    20 expr: expr . ':' expr
    21     | expr . '+' expr
@@ -4427,7 +4419,7 @@ state 162
    40     | expr . LEFT_ASSIGN expr
    41     | expr . RIGHT_ASSIGN expr
    43     | expr . '(' sublist ')'
-   49     | expr . LBB sublist ']' ']'
+   49     | expr . LBB sublist RBB
    50     | expr . '[' sublist ']'
    59     | expr . '$' SYMBOL
    60     | expr . '$' STR_CONST
