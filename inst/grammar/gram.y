@@ -418,7 +418,7 @@ expr	: 	NUM_CONST					{ $$ = $1;  setId( $$, @$); }
 										{ $$ = xxfor($1,$2,$3); setId( $$, @$); }
 	|	WHILE cond expr_or_assign		{ $$ = xxwhile($1,$2,$3);   setId( $$, @$); }
 	|	REPEAT expr_or_assign			{ $$ = xxrepeat($1,$2);         setId( $$, @$);}
-	|	expr LBB sublist ']' ']'		{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); modif_token(&@4, RBB); }
+	|	expr LBB sublist RBB			{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
 	|	expr '[' sublist ']'			{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
 	|	SYMBOL NS_GET SYMBOL			{ $$ = xxbinary($2,$1,$3);      	 setId( $$, @$); modif_token( &@1, SYMBOL_PACKAGE ) ; }
 	|	SYMBOL NS_GET STR_CONST		{ $$ = xxbinary($2,$1,$3);      setId( $$, @$);modif_token( &@1, SYMBOL_PACKAGE ) ; }
@@ -2503,6 +2503,9 @@ static int token(void) {
 			yylval = install("[");
 			return c;
     	case ']':
+			if (*contextp == 'd' && nextchar(']')) {
+			    return RBB;
+			}
 			return c;
     	case '?':
 			strcpy(yytext_, "?");
@@ -2792,10 +2795,9 @@ static int yylex(void){
 			/* Handle brackets, braces and parentheses */
     		
     		case LBB:
-				if(contextp - contextstack >= CONTEXTSTACK_SIZE - 1)
+				if(contextp - contextstack >= CONTEXTSTACK_SIZE)
 				    error(_("contextstack overflow at line %d"), xxlineno);
-				*++contextp = '[';
-				*++contextp = '[';
+				*++contextp = 'd';
 				break;
     		
     		case '[':
@@ -2816,7 +2818,8 @@ static int yylex(void){
 				    error(_("contextstack overflow at line %d"), xxlineno);
 				*++contextp = tok;
 				break;
-    		
+
+    		case RBB:
     		case ']':
 				while (*contextp == 'i')
 				    ifpop();
