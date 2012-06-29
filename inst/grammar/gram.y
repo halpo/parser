@@ -1737,6 +1737,7 @@ static void yyerror(char *s) {
 	"EQ_ASSIGN",	"'='",
 	"RIGHT_ASSIGN",	"'->'",
 	"LBB",		"'[['",
+	"RBB",		"']]'",
 	"FOR",		"'for'",
 	"IN",		"'in'",
 	"IF",		"'if'",
