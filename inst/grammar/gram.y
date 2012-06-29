@@ -1180,7 +1180,8 @@ static SEXP mkString2(const char *s, int len){
 
 /*{{{ IfPush and ifpop */
 static void IfPush(void) {
-    if (*contextp==LBRACE || *contextp=='[' || *contextp=='('  || *contextp == 'i') {
+    if (*contextp==LBRACE || *contextp=='d' || *contextp=='['
+	|| *contextp=='('  || *contextp == 'i') {
 		if(contextp - contextstack >= CONTEXTSTACK_SIZE){
 		    error(_("contextstack overflow"));
 		}
@@ -2317,6 +2318,7 @@ static int token(void) {
 #if defined(SUPPORT_MBCS)
     wchar_t wc;
 #endif
+    const char *p;
 
     if (SavedToken) {
 		c = SavedToken;
@@ -2502,7 +2504,8 @@ static int token(void) {
 			yylval = install("[");
 			return c;
     	case ']':
-			if (*contextp == 'd' && nextchar(']')) {
+			for (p = contextp; *p == 'i'; --p) ;
+			if (*p == 'd' && nextchar(']')) {
 			    return RBB;
 			}
 			return c;
@@ -2640,7 +2643,7 @@ static int yylex(void){
     	/* body of "if" statements. */
     	if (tok == '\n') {
     	
-			if (EatLines || *contextp == '[' || *contextp == '(')
+			if (EatLines || *contextp == 'd' || *contextp == '[' || *contextp == '(')
 			    goto again;
     		
 			/* The essence of this is that in the body of */
@@ -2662,7 +2665,7 @@ static int yylex(void){
 			    /* The corresponding "i" values are */
 			    /* popped off the context stack. */
     		
-			    if (tok == RBRACE || tok == ')' || tok == ']' ) {
+			    if (tok == RBRACE || tok == ')' || tok == RBB || tok == ']' ) {
 					while (*contextp == 'i'){
 					    ifpop();
 					}
