@@ -2567,7 +2567,9 @@ static int token_(void){
 	yylloc.id = identifier ;
 	
 	// record the position
-	if( res != '\n' ){
+	if( res != '\n'
+	    && (*contextp != 'i' || res == '(' || res == ELSE || res == RBRACE
+		|| res == ')' || res == ']' || res == RBB || res == ',') ) {
 		record_( yylloc.first_line, yylloc.first_column, yylloc.first_byte, 
 				_last_line, _last_col, _last_byte, 
 				res, identifier ) ;
