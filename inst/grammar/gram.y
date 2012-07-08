@@ -50,7 +50,6 @@ static int prevbytes[PUSHBACK_BUFSIZE];
 static FILE *fp_parse;
 static int (*ptr_getc)(void);
 
-static int	to_save_token = 0;
 static int	SavedToken;
 static SEXP	SavedLval;
 static char	contextstack[CONTEXTSTACK_SIZE], *contextp;
@@ -2569,13 +2568,6 @@ static int token_(void){
 	
 	// record the position
 	if( res != '\n' ){
-		if (to_save_token) {
-			to_save_token = 0;
-			if (res != ELSE && res != RBRACE && res != ')'
-			    && res != ']' && res != RBB && res != ',') {
-				return res;
-			}
-		}
 		record_( yylloc.first_line, yylloc.first_column, yylloc.first_byte, 
 				_last_line, _last_col, _last_byte, 
 				res, identifier ) ;
@@ -2661,7 +2653,6 @@ static int yylex(void){
 			/* such newlines are discarded. */
     		
 			if (*contextp == 'i') {
-			    to_save_token = 1;
     		
 			    /* Find the next non-newline token */
     		
@@ -2717,6 +2708,9 @@ static int yylex(void){
 					xxbytesave = yylloc.first_byte;
 					SavedLval = yylval;
 					setlastloc();
+					/* Unrecord the pushed back token */
+					/* if not null */
+					if (yytext_[0]) data_count--;
 					return '\n';
 			    }
 			} else {
