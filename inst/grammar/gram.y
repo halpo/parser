@@ -313,7 +313,7 @@ static int mbcs_get_next(int c, wchar_t *wc){
 /*{{{ Tokens */
 %token		END_OF_INPUT ERROR
 %token		STR_CONST NUM_CONST NULL_CONST SYMBOL FUNCTION 
-%token		LEFT_ASSIGN EQ_ASSIGN RIGHT_ASSIGN LBB
+%token		LEFT_ASSIGN EQ_ASSIGN RIGHT_ASSIGN LBB RBB
 %token		FOR IN IF ELSE WHILE NEXT BREAK REPEAT
 %token		GT GE LT LE EQ NE AND OR AND2 OR2
 %token		NS_GET NS_GET_INT
@@ -376,8 +376,8 @@ expr	: 	NUM_CONST					{ $$ = $1;  setId( $$, @$); }
 	|	'{' exprlist '}'				{ $$ = xxexprlist($1,$2);  setId( $$, @$); }
 	|	'(' expr_or_assign ')'			{ $$ = xxparen($1,$2);		setId( $$, @$); }
 
-	|	'-' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); }
-	|	'+' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); }
+	|	'-' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); modif_token(&@1, UMINUS); }
+	|	'+' expr %prec UMINUS			{ $$ = xxunary($1,$2);     setId( $$, @$); modif_token(&@1, UPLUS); }
 	|	'!' expr %prec UNOT				{ $$ = xxunary($1,$2);     setId( $$, @$); }
 	|	'~' expr %prec TILDE			{ $$ = xxunary($1,$2);     setId( $$, @$); }
 	|	'?' expr						{ $$ = xxunary($1,$2);     setId( $$, @$); }
@@ -417,7 +417,7 @@ expr	: 	NUM_CONST					{ $$ = $1;  setId( $$, @$); }
 										{ $$ = xxfor($1,$2,$3); setId( $$, @$); }
 	|	WHILE cond expr_or_assign		{ $$ = xxwhile($1,$2,$3);   setId( $$, @$); }
 	|	REPEAT expr_or_assign			{ $$ = xxrepeat($1,$2);         setId( $$, @$);}
-	|	expr LBB sublist ']' ']'		{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
+	|	expr LBB sublist RBB			{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
 	|	expr '[' sublist ']'			{ $$ = xxsubscript($1,$2,$3);       setId( $$, @$); }
 	|	SYMBOL NS_GET SYMBOL			{ $$ = xxbinary($2,$1,$3);      	 setId( $$, @$); modif_token( &@1, SYMBOL_PACKAGE ) ; }
 	|	SYMBOL NS_GET STR_CONST		{ $$ = xxbinary($2,$1,$3);      setId( $$, @$);modif_token( &@1, SYMBOL_PACKAGE ) ; }
@@ -1180,7 +1180,8 @@ static SEXP mkString2(const char *s, int len){
 
 /*{{{ IfPush and ifpop */
 static void IfPush(void) {
-    if (*contextp==LBRACE || *contextp=='[' || *contextp=='('  || *contextp == 'i') {
+    if (*contextp==LBRACE || *contextp=='d' || *contextp=='['
+	|| *contextp=='('  || *contextp == 'i') {
 		if(contextp - contextstack >= CONTEXTSTACK_SIZE){
 		    error(_("contextstack overflow"));
 		}
@@ -1736,6 +1737,7 @@ static void yyerror(char *s) {
 	"EQ_ASSIGN",	"'='",
 	"RIGHT_ASSIGN",	"'->'",
 	"LBB",		"'[['",
+	"RBB",		"']]'",
 	"FOR",		"'for'",
 	"IN",		"'in'",
 	"IF",		"'if'",
@@ -2317,6 +2319,7 @@ static int token(void) {
 #if defined(SUPPORT_MBCS)
     wchar_t wc;
 #endif
+    const char *p;
 
     if (SavedToken) {
 		c = SavedToken;
@@ -2502,6 +2505,10 @@ static int token(void) {
 			yylval = install("[");
 			return c;
     	case ']':
+			for (p = contextp; *p == 'i'; --p) ;
+			if (*p == 'd' && nextchar(']')) {
+			    return RBB;
+			}
 			return c;
     	case '?':
 			strcpy(yytext_, "?");
@@ -2637,7 +2644,7 @@ static int yylex(void){
     	/* body of "if" statements. */
     	if (tok == '\n') {
     	
-			if (EatLines || *contextp == '[' || *contextp == '(')
+			if (EatLines || *contextp == 'd' || *contextp == '[' || *contextp == '(')
 			    goto again;
     		
 			/* The essence of this is that in the body of */
@@ -2659,7 +2666,7 @@ static int yylex(void){
 			    /* The corresponding "i" values are */
 			    /* popped off the context stack. */
     		
-			    if (tok == RBRACE || tok == ')' || tok == ']' ) {
+			    if (tok == RBRACE || tok == ')' || tok == RBB || tok == ']' ) {
 					while (*contextp == 'i'){
 					    ifpop();
 					}
@@ -2701,6 +2708,9 @@ static int yylex(void){
 					xxbytesave = yylloc.first_byte;
 					SavedLval = yylval;
 					setlastloc();
+					/* Unrecord the pushed back token */
+					/* if not null */
+					if (yytext_[0]) data_count--;
 					return '\n';
 			    }
 			} else {
@@ -2791,10 +2801,9 @@ static int yylex(void){
 			/* Handle brackets, braces and parentheses */
     		
     		case LBB:
-				if(contextp - contextstack >= CONTEXTSTACK_SIZE - 1)
+				if(contextp - contextstack >= CONTEXTSTACK_SIZE)
 				    error(_("contextstack overflow at line %d"), xxlineno);
-				*++contextp = '[';
-				*++contextp = '[';
+				*++contextp = 'd';
 				break;
     		
     		case '[':
@@ -2815,7 +2824,8 @@ static int yylex(void){
 				    error(_("contextstack overflow at line %d"), xxlineno);
 				*++contextp = tok;
 				break;
-    		
+
+    		case RBB:
     		case ']':
 				while (*contextp == 'i')
 				    ifpop();
