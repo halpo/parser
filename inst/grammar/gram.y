@@ -179,7 +179,7 @@ static void setId( SEXP expr, yyltype loc){
 #define LBRACE	'{'
 #define RBRACE	'}'
 
-#define YYDEBUG 1
+// #define YYDEBUG 1
 
 static int colon ;
 
