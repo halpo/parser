@@ -5712,7 +5712,7 @@ static void growID( int target ){
  *
  * Calls the Highlight_ParseFile function from gram.y -> gram.c
  */
-SEXP attribute_hidden do_parser(SEXP args){
+SEXP attribute_visible do_parser(SEXP args){
 	
 	/*{{{ declarations */
 	SEXP result ;

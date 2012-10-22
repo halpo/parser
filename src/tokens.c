@@ -50,7 +50,7 @@ static int _getc( FILE* fp){
 /**
  * Builds the token vector
  */ 
-SEXP attribute_hidden do_getTokens( SEXP args ){
+SEXP attribute_visible do_getTokens( SEXP args ){
 	
 	args = CDR( args ) ; const char* fname = CHAR(STRING_ELT(CAR(args),0) ) ;
 	args = CDR(args) ; 

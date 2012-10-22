@@ -6,22 +6,22 @@
 #include <string.h>
 #include <ctype.h>
 #include <Rinternals.h>
+#include <R_ext/Boolean.h>
+#include <wchar.h>
+
+extern Rboolean utf8locale, mbcslocale; 
 
 int nlines( const char* ) ;
 
-#ifdef SUPPORT_MBCS
-# ifdef Win32
-#  define USE_UTF8_IF_POSSIBLE
-# endif
-#endif
+// #ifdef SUPPORT_MBCS
+// # ifdef Win32
+// #  define USE_UTF8_IF_POSSIBLE
+// # endif
+// #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_visible __attribute__ ((visibility ("default")))
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_visible
+
+# define attribute_visible 
 # define attribute_hidden
-#endif
 
 /* Used as a default for string buffer sizes,
 			   and occasionally as a limit. */
@@ -81,5 +81,17 @@ int file_getc(void) ;
 FILE *	_fopen(const char *filename, const char *mode);
 int	_fgetc(FILE*);
 
+
+/* definitions for R 2.16.0 */
+
+int utf8clen(char c);
+# define Mbrtowc        Rf_mbrtowc
+# define ucstomb        Rf_ucstomb
+extern Rboolean utf8locale, mbcslocale;
+size_t ucstomb(char *s, const unsigned int wc);
+extern size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+#define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
+
+  
 #endif
 

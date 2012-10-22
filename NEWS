@@ -1,8 +1,9 @@
-
+0.1
     o  Added UMINUS, UPLUS Contributed by Qiang Li
     o  Added new token RBB to match ']]' for corresponding LBB/'[[' Contributed by Qiang Li
     o  Bug fix for single unbracketted `if(T)x` clause. Contruibuted by Duncan Murdoch
     o  Added plot.parser for graphical view of parser tree.
+    o  Bug fix to build for R-2.16.0
 
 0.0-16  2012-06-25
     

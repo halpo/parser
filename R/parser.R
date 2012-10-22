@@ -175,7 +175,8 @@ getTokens <- function( x,
 			line1 = data[, "line1" ], 
 			col1  = data[, "byte1"  ], 
 			line2 = data[, "line2" ], 
-			col2  = data[, "byte2"  ] ), 
+			col2  = data[, "byte2"  ],
+            PACKAGE="parser"), 
 		stringsAsFactors = FALSE
 		)
 	
