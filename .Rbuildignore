@@ -1,3 +1,5 @@
 build-grammar
 grammer.mk
 ^\.Rproj\.user$
+\.gitignore
+.*\.gitignore

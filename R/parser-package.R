@@ -22,7 +22,7 @@
 #' head( count.chars( f ) ) 
 #' }
 #' @export
-NULL
+count.chars <- NULL   # replace on load
 
 
 
@@ -45,7 +45,7 @@ NULL
 #' length( readLines( f ) )
 #' }
 #' @export
-NULL
+nlines <- NULL    # replace on load
 
 
 

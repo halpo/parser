@@ -1,6 +1,9 @@
 \name{nlines}
 \alias{nlines}
 \title{Counts the number of lines in a file}
+\usage{
+  nlines(file)
+}
 \arguments{
   \item{file}{The file path. This is \emph{not} using
   connections, so this expects a character string giving

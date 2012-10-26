@@ -4,6 +4,9 @@
 
 This follows the same rules as the parser to count the number of characters
 and the number of bytes in each line of a file}
+\usage{
+  count.chars(file, encoding = "unknown")
+}
 \arguments{
   \item{file}{file \emph{path}}
 

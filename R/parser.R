@@ -91,8 +91,6 @@ parser <- function( file, encoding = "unknown", text ){
 	p
 }
 
-
-
 #' Get the child expression of an expression in the parse tree
 #' 
 #' 
