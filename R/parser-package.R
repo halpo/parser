@@ -22,7 +22,7 @@
 #' head( count.chars( f ) ) 
 #' }
 #' @export
-count.chars <- NULL   # replace on load
+count.chars <- function(file, encoding="unknown"){}   # replace on load
 
 
 
@@ -45,7 +45,7 @@ count.chars <- NULL   # replace on load
 #' length( readLines( f ) )
 #' }
 #' @export
-nlines <- NULL    # replace on load
+nlines <- function(file){}    # replace on load
 
 
 
