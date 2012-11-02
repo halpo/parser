@@ -2,7 +2,7 @@ Package: parser
 Type: Package
 Title: Detailed R source code parser
 Version: 0.1
-Date: 2012-08-08
+Date: 2012-11-02
 Author: Romain Francois <romain@r-enthusiasts.com>
 Maintainer: Andrew Redd <Andrew.Redd@hsc.utah.edu>
 Description: detailed source code parser, based on the
